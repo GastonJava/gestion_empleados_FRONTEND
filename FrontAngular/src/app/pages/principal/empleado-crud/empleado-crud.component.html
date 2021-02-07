@@ -1,0 +1,131 @@
+<div class="container">
+    <form
+      [formGroup]="EmpForm"
+      (ngSubmit)="this[EventValue]()"
+    >
+      <h3>Tabla de empleados</h3>
+      <div class="row">
+        <table class="table">
+          <tr>
+            <td>Nombre</td>
+            <td>
+              <input type="hidden" formControlName="empId" />
+              <input type="text" formControlName="empNombre" />
+              <div
+                *ngIf="submitted && EmpForm.controls.empNombre.errors"
+                class="text-danger"
+              >
+                <div *ngIf="EmpForm.controls.empNombre.errors.required">
+                  Name is required
+                </div>
+              </div>
+            </td>
+          </tr>
+  
+          <tr>
+            <td>Telefono</td>
+            <td>
+              <input type="text" formControlName="empContacto" />
+              <div
+                *ngIf="submitted && EmpForm.controls.empContacto.errors"
+                class="text-danger"
+              >
+                <div *ngIf="EmpForm.controls.empContacto.errors.required">
+                  Contact is required
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Correo</td>
+            <td>
+  
+              <input type="email" formControlName="empEmail" />
+              <div class="text-danger" *ngIf="submitted && EmpForm.controls.empEmail.errors">
+                <div *ngIf="EmpForm.controls.empEmail.errors.required">
+                  Email is required
+                </div>
+              </div>
+  
+            </td>
+          </tr>
+          <tr>
+            <td>Direccion</td>
+            <td>
+              <input type="text" formControlName="empDireccion" />
+              <div
+                *ngIf="submitted && EmpForm.controls.empDireccion.errors"
+                class="text-danger"
+              >
+                <div *ngIf="EmpForm.controls.empDireccion.errors.required">
+                  Address is required
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button type="submit" class="btn btn-primary"> <!-- [disabled]="EmpForm.invalid" --> 
+                {{ EventValue }}
+              </button>
+            </td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                (click) = isToggle() >
+                {{ Nombreboton }}
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+  
+      <!-- <div [hidden] = "seMuestra">This is a div which toggles.</div>
+      <button (click) = isToggle()>{{ Nombreboton }}</button>
+   -->
+      <div class="row">
+  
+        <!-- mostrar vacio si no esta mostrar -->
+        <ng-template #notShow class="text-center">
+          <h1>
+            Para mostrar los datos presionar el boton
+          </h1>
+        </ng-template>
+  
+  
+       <!-- <ng-container *ngIf="MostrarValue=='Mostrar'"> -->
+      <ng-container *ngIf="seMuestra; else notShow"> 
+        <ng-container *ngIf="datosGuardar?.length > 0">
+          <table class="table table-striped">
+            <tr>
+              <td>Id</td>
+              <td>Nombre</td>
+              <td>Contacto</td>
+              <td>Correo</td>
+              <td>Direccion</td>
+              <td>Editar</td>
+              <td>Borrar</td>
+            </tr>
+  
+            <tr *ngFor="let d of datosGuardar">
+              <td>{{ d.empId }}</td>
+              <td>{{ d.empNombre }}</td>
+              <td>{{ d.empContacto }}</td>
+              <td>{{ d.empEmail }}</td>
+              <td>{{ d.empDireccion }}</td>
+              <td><a (click)="EditData(d)" class="btn btn-warning">Editar</a></td>
+              <td>
+                <a (click)="deleteData(d.empId)" class="btn btn-danger">Borrar</a>
+              </td>
+            </tr>
+          </table>
+        </ng-container>
+      </ng-container>       
+  
+        <ng-container *ngIf="datosGuardar?.length < 0">
+          <app-errores></app-errores>
+        </ng-container>
+      </div>
+    </form>
+  </div>

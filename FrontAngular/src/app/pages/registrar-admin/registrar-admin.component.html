@@ -1,0 +1,56 @@
+<h2 class="text-center">Crear Usuario Admin</h2>
+
+<div class="d-flex justify-content-center">
+  <form class="form-horizontal p-3" action="#" [formGroup]="registrar" (ngSubmit)="crearLoginUser()">
+
+    <div class="form-group">
+      <div>
+        <input
+         type="email"
+         class="form-control"
+         placeholder="Ingresar Email"
+         formControlName="emailEmp"
+        />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div>
+        <input
+          type="password"
+          class="form-control"
+          formControlName="passEmp"
+          id="pwd"
+          placeholder="Ingresar Password"
+        />
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <h5>Desea loguearse admin o usuario?</h5>
+
+        <div class="row-3">
+          <select class="form-control"  formControlName="rolEmp">
+            <option [value]="1" selected="selected">Admin</option>
+            <option [value]="2">Usuario nivel 1</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+
+    <span class="altura"></span>
+
+    <div class="btn-group">
+      <div class="form-group">
+        <div class="">
+          <button class="btn btn-info">Enviar</button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+  
+</div>
